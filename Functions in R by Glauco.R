@@ -35,5 +35,15 @@ vec2<-c(10,20,30,40)
 vecmultiply(vec1,vec2)
 
 
+# 2 
 
-sample(vec1)
+# Function that calculates the mode in a vector. Mode is the value that is most observable in a vector.
+# Função que calcula a moda em um vetor.
+
+# Palavras chave : moda
+
+moda = function(dados) {
+  vetor = table(as.vector(dados))
+  names(vetor)[vetor == max(vetor)]
+}
+
