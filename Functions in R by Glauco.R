@@ -47,3 +47,17 @@ moda = function(dados) {
   names(vetor)[vetor == max(vetor)]
 }
 
+
+
+#3
+
+#Plot histogram with normal line
+# Palavras chave : plot, line, gráfico, normal, hist, histograma
+  library(rcompanion)
+  
+  x<-rnorm(1000,mean = 3,sd = 0.25)
+  plotNormalHistogram( x, prob = FALSE, col="blue", border="grey",
+                       main = "Normal Distribution overlay on Histogram",
+                       length = 10000, linecol="red", lwd=3, breaks = 9 )
+  
+)
