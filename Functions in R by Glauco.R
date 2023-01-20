@@ -60,4 +60,17 @@ moda = function(dados) {
                        main = "Normal Distribution overlay on Histogram",
                        length = 10000, linecol="red", lwd=3, breaks = 9 )
   
-)
+
+#4
+
+# Plot de x e y e mais a linha de regressão  
+  
+  
+  plot(idade,tempo)
+  lines(x, y2, col="red", lwd=2)
+  
+  
+# Pode ser direto tbm por abline(lm(pesos ~ alturas))
+  
+  
+
