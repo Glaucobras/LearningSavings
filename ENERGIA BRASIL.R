@@ -11,10 +11,13 @@ library('tidyr')
 df<-separate(df, "aaa", c("data", "hora"), sep = " ")
 df<-separate(df, "data", c("Ano", "Mes", "Dia"), sep = "-")
 df<-separate(df, "hora", c("H", "Minuto", "Segundo"), sep = ":")
-View(df2)
 
+df<-df[df$Ano!=2023,] # Eliminando a última linha que é sobre Jan 2023 que está incompleta
 
 head(df)
+dim(df)
+str(df)
+
 df$Segundo<-NULL
 df$Minuto<-NULL
 
@@ -39,6 +42,7 @@ for (i in unique(dfNatal$Ano)){
   print(paste(i,bbb))
   
 }
+View(dfNatalMedia)
 names(dfNatalMedia)<-c("Ano","Media")
 plot(dfNatalMedia$Ano,dfNatalMedia$Media)
          
@@ -63,7 +67,7 @@ for (i in unique(dfRev$Ano)){
   print(paste(i,bbb))
   
 }                 
-
+View(dfRevMedia)
 names(dfRevMedia)<-c("Ano","Media")
 plot(dfRevMedia$Ano,dfRevMedia$Media)
 
@@ -84,7 +88,7 @@ for (i in unique(df$Ano)){
   
 } 
 
-
+View(dfAnoMedia)
 
 #comparando tudo
 dfAnoMedia<- dfAnoMedia[-24,]
@@ -97,7 +101,7 @@ dfTotal<- cbind(dfAnoMedia,dfNatalMedia,dfRevMedia)
 dfTotal
 dfTotal$Ano_Natal<-NULL
 dfTotal$Ano_Rev<-NULL
-dfTotal
+View(dfTotal)
 
 
 
@@ -123,7 +127,7 @@ dfTotalGW$Media_Natal<-dfTotalGW$Media_Natal/1000
 dfTotalGW$Media_Rev<-dfTotalGW$Media_Rev/1000
 dfTotalGW$AnoparaNatal<-dfTotalGW$AnoparaNatal/1000
 dfTotalGW$AnoparaRev<-dfTotalGW$AnoparaRev/1000
-dfTotalGW
+View(dfTotalGW)
 
 
 plot(dfTotalGW$Ano, dfTotalGW$AnoparaNatal, col='red', pch=19)
@@ -152,9 +156,9 @@ for (i in unique(df$Ano)){
 }
   
 names(dfMediaMensal)<-c("Ano","Mes","Consumo_MW")  
-dfMediaMensal
+View(dfMediaMensal)
 dim(dfMediaMensal)
-dfMediaMensal$Contador<-1:277
+dfMediaMensal$Contador<-1:276
 
 plot(dfMediaMensal$Contador,dfMediaMensal$Consumo_MW, col='blue', pch=19)
 
@@ -179,3 +183,22 @@ dfMediaDEZ<-dfMediaMensal[dfMediaMensal$Mes==12,]
 plot(dfTotal$Ano, dfTotal$Media_Anual, col='red', pch=19)
 points(dfMediaFEV$Ano,dfMediaFEV$Consumo_MW, col='blue', pch=19)
 
+
+#calculando as variâncias por ano
+
+df2<-df
+df2$Mes<-NULL
+df2$Dia<-NULL
+df2$H<-NULL
+View(df2)
+
+df2000<-as.data.frame(df2[df2$Ano==2000,2])
+var(df2000$`Consumo MW`)
+sd(df2000$`Consumo MW`)
+boxplot(df2000$`Consumo MW`)
+
+
+df2020<-as.data.frame(df2[df2$Ano==2020,2])
+var(df2020$`Consumo MW`)
+sd(df2020$`Consumo MW`)
+boxplot(df2020$`Consumo MW`)
