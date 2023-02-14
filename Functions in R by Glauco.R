@@ -74,3 +74,19 @@ moda = function(dados) {
   
   
 
+#5
+  
+  # normalizando os dados (dá para normalizar o dataset inteiro de uma vez)
+  maxs <- apply(dados, 2, max) 
+  mins <- apply(dados, 2, min)
+  scaled <- as.data.frame(scale(dados, center = mins, scale = maxs - mins))
+  
+  # desnormalizando os dados (Só sei fazer coluna a coluna)
+  prev_nn_des <- prev_nn*(max(dados$medv)-min(dados$medv))+min(dados$medv)
+  
+  
+#6
+  # como calcular o erro do modelo
+  
+  erro <- sum((varteste - varprevista)^2)/nrow(dadosteste)
+  
